@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <title>Watson Assitant</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./public/stylesheets/style.css">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td style="width:30%;"><img src="./public/images/newapp-icon.png"></td>
+            <td>
+                <h2>Watson Assitant</h2>
+                <h1>Watson Assitant</h1>
+                <p></p>
+                <p></p>
+                <p>Thanks for creating the <span class="blue">NodeJS Application Backend</span>.</p>
+                <p></p>
+                <p>Testing DEMO API</p>
+
+                <div id="idStatus">Testing...</div>
+                <br>
+
+                <div id="id0"></div>
+
+                <script>
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "http://noderedsandbox.mydemo.center/getDashboardData";
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            myFunctionN(myArr);
+                            document.getElementById("idStatus").innerHTML = "STATUS: OK";
+                        } else {
+                            document.getElementById("idStatus").innerHTML = "STATUS: ERROR";
+                            document.getElementById("id0").innerHTML = "Server not running";
+
+                        }
+
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+
+                    function myFunction(arr) {
+
+                        document.getElementById("id01").innerHTML = JSON.stringify(arr);
+                    }
+
+
+                    function myFunctionN(arr) {
+                        var out = "";
+                        var i;
+
+
+
+                        for (i = 0; i < arr.length; i++) {
+                            var j;
+                            var k;
+
+                            out += "<BR>---------------------------------------------------<BR><H2>REQUEST</H2>---------------------------------------------------<BR><BR>---------------------------------------------------<BR>"
+                             out += "Entities<BR>---------------------------------------------------<BR>"
+                            var tempEnt = arr[i].payload.entity;
+
+                            for (j = 0; j < tempEnt.length; j++) {
+                                out += "<B>Entity: " + tempEnt[j].text + "</B> of type " +
+                                    tempEnt[j].type + "<BR>";
+                            }
+                            
+                            out += "<BR><BR>Keywords<BR>---------------------------------------------------<BR>"
+                            
+                            var tempTax = arr[i].payload.keyword;
+
+                            for (k = 0; k < tempTax.length; k++) {
+                                out += "Keyword: " + tempTax[k].text + "<BR>  Relevance: " +
+                                    tempTax[k].relevance + "</a><br><BR> ";
+                            }
+                            
+                        }
+                        
+                        
+                        
+                        document.getElementById("id0").innerHTML = out;
+                    }
+                </script>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>UrbanCode Deploy - Docker Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./public/stylesheets/style.css">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td style="width:30%;"><img src="./public/images/newapp-icon.png"></td>
+            <td>
+                <h2>UrbanCode Deploy</h2>
+                <h1>Docker Demo</h1>
+                <p></p>
+                <p></p>
+                <p>Thanks for creating the <span class="blue">NodeJS Application Backend</span>.</p>
+                <p></p>
+                <p>Testing DEMO API</p>
+
+                <div id="idStatus">Testing...</div><br>
+                
+                <div id="id0"></div>
+
+                <script>
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "http://localhost:3000/getDemo";
+
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            var myArr = JSON.parse(xmlhttp.responseText);
+                            myFunctionN(myArr);
+                            document.getElementById("idStatus").innerHTML = "STATUS: OK";
+                        } else {
+                            document.getElementById("idStatus").innerHTML = "STATUS: ERROR";
+                            document.getElementById("id0").innerHTML = "Server not running";
+                             
+                        }
+
+                    }
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+
+                    function myFunction(arr) {
+
+                        document.getElementById("id01").innerHTML = JSON.stringify(arr);
+                    }
+
+
+                    function myFunctionN(arr) {
+                        var out = "";
+                        var i;
+                        var tempArr = arr.values;
+                        
+                        for (i = 0; i < tempArr.length; i++) {
+                            out += "Name: " + tempArr[i].name + "<BR>  eMail: " +
+                                tempArr[i].email + "</a><br><BR> ";
+                        }
+                        document.getElementById("id0").innerHTML = out;
+                    }
+                </script>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

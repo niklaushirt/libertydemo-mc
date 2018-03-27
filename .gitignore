@@ -8,6 +8,8 @@
 /.project
 /.settings
 
+/BACKEND/node_modules
+
 /caches
 /local.properties
 .*.swp

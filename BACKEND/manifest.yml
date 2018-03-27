@@ -1,0 +1,8 @@
+applications:
+- disk_quota: 1024M
+  host: mobileBackend
+  name: mobileBackend
+  path: .
+  domain: mydemo.center
+  instances: 1
+  memory: 256M
