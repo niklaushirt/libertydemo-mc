@@ -10,10 +10,10 @@
     <link rel="shortcut icon" href="./public/images/favicon.png" type="image/png" />
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./public/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./public/bootstrap-theme.min.css">
     <link rel="stylesheet" href="./public/stylesheets/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -108,9 +108,8 @@
 
                         <script>
                             var xmlhttp = new XMLHttpRequest();
-                            var url = "http://192.168.27.1:3000/getDemo";
-                            xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-                            xmlhttp.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                            var url = "http://localhost:3000/getDemo";
+
                             xmlhttp.onreadystatechange = function () {
                                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                                     var myArr = JSON.parse(xmlhttp.responseText);
@@ -124,6 +123,10 @@
 
                             }
                             xmlhttp.open("GET", url, true);
+                            xmlhttp.setRequestHeader("X-Alt-Referer", "http://www.google.com");
+                            xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+                            xmlhttp.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
                             xmlhttp.send();
 
                             function myFunction(arr) {

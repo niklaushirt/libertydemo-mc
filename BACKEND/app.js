@@ -26,6 +26,8 @@ var express = require('express'),
     UAparser = require('ua-parser-js'),
     userAgentParser = new UAparser();
 
+var cors = require('cors');
+
 //---Deployment Tracker---------------------------------------------------------
 require("cf-deployment-tracker-client").track();
 
@@ -57,7 +59,7 @@ var speechToText = watson.speech_to_text(STT_CREDENTIALS);
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // BASE API
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+app.use(cors());
 // render index page
 app.get('/', function (req, res) {
     res.render('index');
@@ -103,7 +105,7 @@ app.get('/getWatsonSolution', function (req, res) {
     console.log("Req Qty:" + theQty);
     console.log("Req Risk:" + theRisk);
 
-    //Example Solution    
+    //Example Solution
     var actResult = '{ \"solution\": [{ \"Name\": \"OSPHX\", \"Gain\": \"6.46\", \"Risk\": \"0.3\", \"Buy\": \"18.09\", \"Quantity\": \"49863.63\" }, { \"Name\": \"OBIOX\", \"Gain\": \"7.48\", \"Risk\": \"0.14\", \"Buy\": \"19.74\", \"Quantity\": \"65111.66\" }, { \"Name\": \"OSICX\", \"Gain\": \"3.1\", \"Risk\": \"0.65\", \"Buy\": \"5.14\", \"Quantity\": \"298661.23\" }, { \"Name\": \"OMHTX\", \"Gain\": \"0.4\", \"Risk\": \"0.91\", \"Buy\": \"2.18\", \"Quantity\": \"55545.88\" }, { \"Name\": \"OICNX\", \"Gain\": \"1.9\", \"Risk\": \"0.97\", \"Buy\": \"1.01\", \"Quantity\": \"63434.82\" }, { \"Name\": \"OLTMX\", \"Gain\": \"2.1\", \"Risk\": \"0.74\", \"Buy\": \"2.6\", \"Quantity\": \"41325.69\" }] }';
     var jsonObj = JSON.parse(actResult);
     var jsonArray = jsonObj.solution
@@ -186,7 +188,7 @@ app.get('/getWatsonSolutionGlue', function (req, res) {
     var thrGain = req.query.time;
 
     console.log("Req Gain:" + thrGain);
-    //Example Solution 
+    //Example Solution
     var actResult = '{\"solution\": [ { \"name\": \"GRONK\", \"isActive\": false, \"risk\": 9, \"hardeningtime\": 73, \"price\": 42.7, \"container\": \"powder\", \"availability\": 33, \"gain\": 20.4 }, { \"name\": \"VERBUS\", \"isActive\": true, \"risk\": 10, \"hardeningtime\": 111, \"price\": 34.65, \"container\": \"tube\", \"availability\": 28, \"gain\": 13.33 }, { \"name\": \"KEGULAR\", \"isActive\": true, \"risk\": 5, \"hardeningtime\": 36, \"price\": 33.58, \"container\": \"powder\", \"availability\": 74, \"gain\": 44.32 }, { \"key\": \"3\", \"name\": \"DATAGEN\", \"isActive\": true, \"risk\": 2, \"hardeningtime\": 82, \"price\": 90.01, \"container\": \"tin can\", \"availability\": 60, \"gain\": 15.58 }, { \"key\": \"4\", \"name\": \"QUILITY\", \"isActive\": false, \"risk\": 3, \"hardeningtime\": 41, \"price\": 56.97, \"container\": \"tin can\", \"availability\": 36, \"gain\": 16.82 }, { \"key\": \"5\", \"name\": \"PATHWAYS\", \"isActive\": false, \"risk\": 6, \"hardeningtime\": 39, \"price\": 40.74, \"container\": \"powder\", \"availability\": 50, \"gain\": 14.68 }, { \"key\": \"6\", \"name\": \"PETIGEMS\", \"isActive\": false, \"risk\": 4, \"hardeningtime\": 50, \"price\": 23.34, \"container\": \"tin can\", \"availability\": 11, \"gain\": 11.2 }, { \"key\": \"7\", \"name\": \"BIZMATIC\", \"isActive\": true, \"risk\": 3, \"hardeningtime\": 36, \"price\": 30.2, \"container\": \"tin can\", \"availability\": 64, \"gain\": 6.28 }, { \"key\": \"8\", \"name\": \"GALLAXIA\", \"isActive\": false, \"risk\": 4, \"hardeningtime\": 52, \"price\": 73.28, \"container\": \"tube\", \"availability\": 50, \"gain\": 10.47 }, { \"key\": \"9\", \"name\": \"GENESYNK\", \"isActive\": false, \"risk\": 6, \"hardeningtime\": 71, \"price\": 97.01, \"container\": \"tin can\", \"availability\": 16, \"gain\": 18.49 }, { \"key\": \"10\", \"name\": \"ENERSAVE\", \"isActive\": false, \"risk\": 10, \"hardeningtime\": 142, \"price\": 46.89, \"container\": \"tin can\", \"availability\": 91, \"gain\": 21.82 }, { \"key\": \"11\", \"name\": \"XTH\", \"isActive\": true, \"risk\": 8, \"hardeningtime\": 57, \"price\": 95.84, \"container\": \"tube\", \"availability\": 90, \"gain\": 17.13 }, { \"key\": \"12\", \"name\": \"VORTEXACO\", \"isActive\": true, \"risk\": 1, \"hardeningtime\": 116, \"price\": 65.82, \"container\": \"tube\", \"availability\": 15, \"gain\": 15.78 }, { \"key\": \"13\", \"name\": \"MAGNAFONE\", \"isActive\": true, \"risk\": 4, \"hardeningtime\": 107, \"price\": 53.88, \"container\": \"tube\", \"availability\": 45, \"gain\": 13.47 }, { \"key\": \"14\", \"name\": \"FUTURIS\", \"isActive\": false, \"risk\": 1, \"hardeningtime\": 25, \"price\": 38.97, \"container\": \"tube\", \"availability\": 86, \"gain\": 34.75 }, { \"key\": \"15\", \"name\": \"MEDIOT\", \"isActive\": true, \"risk\": 2, \"hardeningtime\": 75, \"price\": 18.93, \"container\": \"tube\", \"availability\": 98, \"gain\": 9.73 }, { \"key\": \"16\", \"name\": \"ENTOGROK\", \"isActive\": true, \"risk\": 3, \"hardeningtime\": 34, \"price\": 51.61, \"container\": \"powder\", \"availability\": 26, \"gain\": 2.84 }, { \"key\": \"17\", \"name\": \"PHEAST\", \"isActive\": true, \"risk\": 6, \"hardeningtime\": 25, \"price\": 39.57, \"container\": \"tube\", \"availability\": 35, \"gain\": 8.22 }, { \"key\": \"18\", \"name\": \"ISOSWITCH\", \"isActive\": false, \"risk\": 6, \"hardeningtime\": 38, \"price\": 74.63, \"container\": \"powder\", \"availability\": 67, \"gain\": 13.57 }, { \"key\": \"19\", \"name\": \"STELAECOR\", \"isActive\": false, \"risk\": 9, \"hardeningtime\": 45, \"price\": 53.83, \"container\": \"tube\", \"availability\": 22, \"gain\": 13.24 }, { \"key\": \"20\", \"name\": \"SLUMBERIA\", \"isActive\": false, \"risk\": 7, \"hardeningtime\": 44, \"price\": 42.98, \"container\": \"powder\", \"availability\": 59, \"gain\": 20.24 }, { \"key\": \"21\", \"name\": \"CANOPOLY\", \"isActive\": true, \"risk\": 7, \"hardeningtime\": 78, \"price\": 30.36, \"container\": \"tin can\", \"availability\": 26, \"gain\": 8.06 }, { \"key\": \"22\", \"name\": \"ANACHO\", \"isActive\": true, \"risk\": 3, \"hardeningtime\": 79, \"price\": 37.19, \"container\": \"powder\", \"availability\": 95, \"gain\": 20.94 }, { \"key\": \"23\", \"name\": \"AQUAMATE\", \"isActive\": false, \"risk\": 3, \"hardeningtime\": 52, \"price\": 33.9, \"container\": \"tin can\", \"availability\": 80, \"gain\": 28.24 }, { \"key\": \"24\", \"name\": \"TETAK\", \"isActive\": false, \"risk\": 6, \"hardeningtime\": 111, \"price\": 68.26, \"container\": \"tin can\", \"availability\": 1, \"gain\": 10.18 }, { \"key\": \"25\", \"name\": \"DARWINIUM\", \"isActive\": true, \"risk\": 6, \"hardeningtime\": 26, \"price\": 21.71,\"container\": \"tube\",\"availability\": 14,\"gain\": 7.82}]}';
     var jsonObj = JSON.parse(actResult);
     var jsonArray = jsonObj.solution
@@ -235,7 +237,7 @@ app.get('/getWatsonSolutionGlue', function (req, res) {
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// CUSTOMER CARE API 
+// CUSTOMER CARE API
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // -----------------------------
@@ -277,7 +279,7 @@ app.post('/complaints', function (req, res) {
 
                     console.log("What I understood:\r\n" + JSON.stringify(result.transcript) + "\r\n\r\n");
                     var transcription = JSON.stringify(result.transcript);
-                    
+
                     //Kick off Backend Treatment in NodeRed
                     var requestify = require('requestify');
 
