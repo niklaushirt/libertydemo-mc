@@ -93,7 +93,7 @@
                         <h1>Demo for Customer</h1>
                         <p></p>
                         <p></p>
-                    
+
 
                         <p><hr></p>
                         <p><hr></p>
@@ -109,7 +109,8 @@
                         <script>
                             var xmlhttp = new XMLHttpRequest();
                             var url = "http://192.168.27.1:3000/getDemo";
-
+                            xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+                            xmlhttp.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
                             xmlhttp.onreadystatechange = function () {
                                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                                     var myArr = JSON.parse(xmlhttp.responseText);
